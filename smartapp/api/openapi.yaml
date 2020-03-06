@@ -1,0 +1,5752 @@
+openapi: 3.0.1
+info:
+  title: SmartThings SmartApps API
+  version: v1.0.3
+servers:
+- url: https://smartapps/
+tags:
+- description: |
+    SmartThings SmartApps are client integrations built on top of the SmartThings platform.  These applications
+    are written in a technology chosen by the developer, and registered with the SmartThings platform.  The API
+    documented here details out what your client can expect when invoked by the SmartThings platform.
+  name: SmartApps
+paths:
+  /:
+    post:
+      description: |
+        Execute a SmartThings SmartApp. Each SmartThings app execution is expected to contain the information outlined in the ExecutionRequest.
+      operationId: execute
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ExecutionRequest'
+        required: true
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionResponse'
+          description: Execution response.
+      summary: Execute a third-party SmartApp.
+      tags: []
+      x-codegen-request-body-name: executionRequest
+components:
+  schemas:
+    ExecutionRequest:
+      description: |
+        The root model for all executions.  An execution request is compositional in nature.  Client's can
+        expect exactly one *Data field set depending on the type of execution.  For example, if execution is
+        of type EVENT, the "eventData" field will be set.
+      example:
+        settings:
+          key: settings
+        configurationData:
+          installedAppId: installedAppId
+          pageId: pageId
+          config: {}
+          previousPageId: previousPageId
+        updateData:
+          authToken: authToken
+          installedApp:
+            installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+            locationId: e675a3d9-2499-406c-86dc-8a492a886494
+            config:
+              contactSensor:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                  componentId: main
+              lightSwitch:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                  componentId: main
+              minutes:
+              - valueType: STRING
+                stringConfig:
+                  value: "5"
+            permissions:
+            - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+            - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+            - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          previousPermissions:
+          - previousPermissions
+          - previousPermissions
+          previousConfig: {}
+          refreshToken: refreshToken
+        executeData:
+          authToken: authToken
+          installedApp:
+            installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+            locationId: e675a3d9-2499-406c-86dc-8a492a886494
+            config:
+              contactSensor:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                  componentId: main
+              lightSwitch:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                  componentId: main
+              minutes:
+              - valueType: STRING
+                stringConfig:
+                  value: "5"
+            permissions:
+            - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+            - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+            - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          parameters:
+            key: parameters
+        locale: en
+        version: 1.0.0
+        pingData:
+          challenge: challenge
+        executionId: b328f242-c602-4204-8d73-33c48ae180af
+        eventData:
+          authToken: authToken
+          installedApp:
+            installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+            locationId: e675a3d9-2499-406c-86dc-8a492a886494
+            config:
+              contactSensor:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                  componentId: main
+              lightSwitch:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                  componentId: main
+              minutes:
+              - valueType: STRING
+                stringConfig:
+                  value: "5"
+            permissions:
+            - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+            - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+            - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          events:
+          - deviceCommandsEvent:
+              eventId: eventId
+              profileId: profileId
+              externalId: externalId
+              deviceId: deviceId
+              commands:
+              - capability: switch
+                componentId: main
+                arguments: []
+                command: "on"
+              - capability: switch
+                componentId: main
+                arguments: []
+                command: "on"
+            deviceHealthEvent:
+              hubId: hubId
+              eventId: eventId
+              reason: NONE
+              locationId: locationId
+              deviceId: deviceId
+              status: OFFLINE
+            modeEvent:
+              eventId: eventId
+              modeId: modeId
+              locationId: locationId
+            eventTime: 2000-01-23T04:56:07.000+00:00
+            securityArmStateEvent:
+              eventId: eventId
+              armState: UNKNOWN
+              optionalArguments:
+                key:
+                  stringValue: stringValue
+                  intValue: 0
+                  valueType: NULL_VALUE
+                  boolValue: true
+                  doubleValue: 6.027456183070403
+              locationId: locationId
+            deviceLifecycleEvent:
+              principal: principal
+              eventId: eventId
+              locationId: locationId
+              create: '{}'
+              update: '{}'
+              moveFrom:
+                locationId: locationId
+              deviceId: deviceId
+              deviceName: deviceName
+              delete: '{}'
+              moveTo:
+                locationId: locationId
+            sceneLifecycleEvent:
+              eventId: eventId
+              locationId: locationId
+              sceneId: sceneId
+              create: '{}'
+              update: '{}'
+              delete: '{}'
+            deviceEvent:
+              eventId: 736e3903-001c-4d40-b408-ff40d162a06b
+              capability: motionSensor
+              componentId: main
+              data: '{}'
+              locationId: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+              valueType: number
+              subscriptionName: motion_sensors
+              stateChange: true
+              attribute: motion
+              deviceId: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+              value: active
+            timerEvent:
+              eventId: eventId
+              expression: expression
+              name: lights_off_timeout
+              time: 2000-01-23T04:56:07.000+00:00
+          - deviceCommandsEvent:
+              eventId: eventId
+              profileId: profileId
+              externalId: externalId
+              deviceId: deviceId
+              commands:
+              - capability: switch
+                componentId: main
+                arguments: []
+                command: "on"
+              - capability: switch
+                componentId: main
+                arguments: []
+                command: "on"
+            deviceHealthEvent:
+              hubId: hubId
+              eventId: eventId
+              reason: NONE
+              locationId: locationId
+              deviceId: deviceId
+              status: OFFLINE
+            modeEvent:
+              eventId: eventId
+              modeId: modeId
+              locationId: locationId
+            eventTime: 2000-01-23T04:56:07.000+00:00
+            securityArmStateEvent:
+              eventId: eventId
+              armState: UNKNOWN
+              optionalArguments:
+                key:
+                  stringValue: stringValue
+                  intValue: 0
+                  valueType: NULL_VALUE
+                  boolValue: true
+                  doubleValue: 6.027456183070403
+              locationId: locationId
+            deviceLifecycleEvent:
+              principal: principal
+              eventId: eventId
+              locationId: locationId
+              create: '{}'
+              update: '{}'
+              moveFrom:
+                locationId: locationId
+              deviceId: deviceId
+              deviceName: deviceName
+              delete: '{}'
+              moveTo:
+                locationId: locationId
+            sceneLifecycleEvent:
+              eventId: eventId
+              locationId: locationId
+              sceneId: sceneId
+              create: '{}'
+              update: '{}'
+              delete: '{}'
+            deviceEvent:
+              eventId: 736e3903-001c-4d40-b408-ff40d162a06b
+              capability: motionSensor
+              componentId: main
+              data: '{}'
+              locationId: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+              valueType: number
+              subscriptionName: motion_sensors
+              stateChange: true
+              attribute: motion
+              deviceId: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+              value: active
+            timerEvent:
+              eventId: eventId
+              expression: expression
+              name: lights_off_timeout
+              time: 2000-01-23T04:56:07.000+00:00
+        oauthCallbackData:
+          installedAppId: installedAppId
+          urlPath: urlPath
+        dashboardData:
+          authToken: authToken
+          installedApp:
+            installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+            locationId: e675a3d9-2499-406c-86dc-8a492a886494
+            config:
+              contactSensor:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                  componentId: main
+              lightSwitch:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                  componentId: main
+              minutes:
+              - valueType: STRING
+                stringConfig:
+                  value: "5"
+            permissions:
+            - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+            - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+            - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+        appId: 9871bcc7-36d8-4b5a-ad46-de1645b8ff3e
+        client:
+          supportedTemplates:
+          - BASIC_V1
+          - BASIC_V1
+          os: os
+          language: language
+          version: version
+        installData:
+          authToken: authToken
+          installedApp:
+            installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+            locationId: e675a3d9-2499-406c-86dc-8a492a886494
+            config:
+              contactSensor:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                  componentId: main
+              lightSwitch:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                  componentId: main
+              minutes:
+              - valueType: STRING
+                stringConfig:
+                  value: "5"
+            permissions:
+            - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+            - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+            - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          refreshToken: refreshToken
+        confirmationData:
+          confirmationUrl: http://example.com/aeiou
+          appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uninstallData:
+          installedApp:
+            installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+            locationId: e675a3d9-2499-406c-86dc-8a492a886494
+            config:
+              contactSensor:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                  componentId: main
+              lightSwitch:
+              - valueType: DEVICE
+                deviceConfig:
+                  deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                  componentId: main
+              minutes:
+              - valueType: STRING
+                stringConfig:
+                  value: "5"
+            permissions:
+            - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+            - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+            - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+      properties:
+        lifecycle:
+          $ref: '#/components/schemas/AppLifecycle'
+        executionId:
+          description: This is a correlation id that is assigned to the execution
+            that is useful for support requests.
+          example: b328f242-c602-4204-8d73-33c48ae180af
+          format: uuid
+          type: string
+        appId:
+          description: A globally unique identifier for the application being executed.
+            It should match the ID of the application itself.
+          example: 9871bcc7-36d8-4b5a-ad46-de1645b8ff3e
+          format: uuid
+          type: string
+        locale:
+          description: An IETF BCP 47 language tag representing the chosen locale
+            for this account.
+          example: en
+          type: string
+        version:
+          description: The version of the execution's request model.
+          example: 1.0.0
+          type: string
+        client:
+          $ref: '#/components/schemas/ClientDetails'
+        eventData:
+          $ref: '#/components/schemas/EventData'
+        installData:
+          $ref: '#/components/schemas/InstallData'
+        updateData:
+          $ref: '#/components/schemas/UpdateData'
+        uninstallData:
+          $ref: '#/components/schemas/UninstallData'
+        configurationData:
+          $ref: '#/components/schemas/ConfigurationData'
+        pingData:
+          $ref: '#/components/schemas/PingData'
+        oauthCallbackData:
+          $ref: '#/components/schemas/OAuthCallbackData'
+        executeData:
+          $ref: '#/components/schemas/ExecuteData'
+        dashboardData:
+          $ref: '#/components/schemas/DashboardData'
+        confirmationData:
+          $ref: '#/components/schemas/ConfirmationData'
+        settings:
+          additionalProperties:
+            type: string
+          description: Global settings as defined on the App.
+          type: object
+      type: object
+    ExecutionResponse:
+      description: |
+        Expected response structure for an SmartApp execution.  An execution response is compositional in nature.  Client's should
+        set exactly one *Data field depending on the type of execution.  For example, if the execution request's lifecycle was of type EVENT,
+        the "eventData" field should be returned.
+      example:
+        eventData: '{}'
+        configurationData:
+          page:
+            nextPageId: nextPageId
+            nextText: nextText
+            name: name
+            style: NORMAL
+            pageId: pageId
+            complete: false
+            sections:
+            - settings:
+              - null
+              - null
+              hidden: false
+              hideable: false
+              name: name
+              style: NORMAL
+            - settings:
+              - null
+              - null
+              hidden: false
+              hideable: false
+              name: name
+              style: NORMAL
+            previousPageId: previousPageId
+        oauthCallbackData: '{}'
+        dashboardData:
+          cards:
+          - basicV2:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              name: Smart Home Monitor
+              description: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image.png
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  url: https://openapi-generator.tech
+                text:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  content: content
+                items:
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+            cardId: some-card-id
+            basicV1:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              name: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  name: name
+                  url: https://openapi-generator.tech
+                text:
+                  content: content
+            freeForm:
+              attributes:
+                key: attributes
+          - basicV2:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              name: Smart Home Monitor
+              description: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image.png
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  url: https://openapi-generator.tech
+                text:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  content: content
+                items:
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+            cardId: some-card-id
+            basicV1:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              name: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  name: name
+                  url: https://openapi-generator.tech
+                text:
+                  content: content
+            freeForm:
+              attributes:
+                key: attributes
+          - basicV2:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              name: Smart Home Monitor
+              description: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image.png
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  url: https://openapi-generator.tech
+                text:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  content: content
+                items:
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+            cardId: some-card-id
+            basicV1:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              name: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  name: name
+                  url: https://openapi-generator.tech
+                text:
+                  content: content
+            freeForm:
+              attributes:
+                key: attributes
+          - basicV2:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              name: Smart Home Monitor
+              description: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image.png
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  url: https://openapi-generator.tech
+                text:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  content: content
+                items:
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+            cardId: some-card-id
+            basicV1:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              name: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  name: name
+                  url: https://openapi-generator.tech
+                text:
+                  content: content
+            freeForm:
+              attributes:
+                key: attributes
+          - basicV2:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  pressedIconUrl: https://smart-home-monitor.com/image.png
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  releasedIconUrl: https://smart-home-monitor.com/image.png
+              name: Smart Home Monitor
+              description: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image.png
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  url: https://openapi-generator.tech
+                text:
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  content: content
+                items:
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+                - item:
+                    description: description
+                    action:
+                      launchPlugin:
+                        pluginId: pluginId
+                        uri: uri
+                      execute:
+                        parameters:
+                          key: parameters
+                    bgImage:
+                      color: color
+                      alpha: 6.027456183070403
+                      url: https://openapi-generator.tech
+                    url: https://openapi-generator.tech
+            cardId: some-card-id
+            basicV1:
+              buttons:
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              - textButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                iconButton:
+                  name: name
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  iconUrl: https://openapi-generator.tech
+              name: Smart Home Monitor
+              iconUrl: https://smart-home-monitor.com/image
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              body:
+                image:
+                  name: name
+                  url: https://openapi-generator.tech
+                text:
+                  content: content
+            freeForm:
+              attributes:
+                key: attributes
+          serviceName: serviceName
+        updateData: '{}'
+        installData: '{}'
+        executeData: '{}'
+        pingData:
+          challenge: challenge
+        statusCode: 0
+        uninstallData: '{}'
+      properties:
+        statusCode:
+          type: integer
+        eventData:
+          description: |
+            Empty object response for an Event lifecycle execution.
+          type: object
+        installData:
+          description: |
+            Empty object response for an Install lifecycle execution.
+          type: object
+        updateData:
+          description: |
+            Empty object response for an Update lifecycle execution.
+          type: object
+        uninstallData:
+          description: |
+            Empty object response for an Uninstall lifecycle execution.
+          type: object
+        configurationData:
+          $ref: '#/components/schemas/ConfigurationResponseData'
+        pingData:
+          $ref: '#/components/schemas/PingResponseData'
+        oauthCallbackData:
+          description: |
+            Empty object response for an OAuth Callback lifecycle execution.
+          type: object
+        executeData:
+          description: |
+            A custom JSON formatted response object with a maximum size of 64kb.
+          properties: {}
+          type: object
+        dashboardData:
+          $ref: '#/components/schemas/DashboardResponseData'
+      type: object
+    Permissions:
+      description: A list of permissions associated with this execution. See `securityDefinitions`
+        for more information.
+      items:
+        type: string
+      type: array
+    StringConfig:
+      description: A simple string configuration.
+      example:
+        value: 31192dc9-eb45-4d90-b606-21e9b66d8c2b
+      properties:
+        value:
+          description: A config value
+          maxLength: 2048
+          type: string
+      type: object
+    DeviceConfig:
+      description: A device configuration.
+      example:
+        deviceId: 31192dc9-eb45-4d90-b606-21e9b66d8c2b
+        componentId: main
+      properties:
+        deviceId:
+          description: The ID of the device.
+          format: ^(?:([0-9a-fA-F]{32})|([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}))$
+          type: string
+        componentId:
+          description: The component ID on the device.
+          format: ^[-_!.~'()*0-9a-zA-Z]{1,36}$
+          type: string
+      type: object
+    ModeConfig:
+      description: A mode configuration.
+      example:
+        modeId: 9206ea57-2e2e-414c-a792-9087117ca3d8
+      properties:
+        modeId:
+          description: The ID of the mode.
+          format: ^(?:([0-9a-fA-F]{32})|([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}))$
+          type: string
+      type: object
+    SceneConfig:
+      description: A scene configuration.
+      example:
+        sceneId: 9206ea57-2e2e-414c-a792-9087117ca3d8
+      properties:
+        sceneId:
+          description: The ID of the scene.
+          format: ^(?:([0-9a-fA-F]{32})|([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}))$
+          type: string
+      type: object
+    MessageConfig:
+      description: A message configuration.
+      example:
+        messageGroupKey: leaks
+      properties:
+        messageGroupKey:
+          description: The key value of the message group.
+          format: ^[a-zA-Z0-9._]{1,36}$
+          type: string
+      type: object
+    ConfigEntry:
+      description: A configuration value type and the correspodning configuration.
+      example:
+        valueType: DEVICE
+        deviceConfig:
+          deviceId: 31192dc9-eb45-4d90-b606-21e9b66d8c2b
+          componentId: main
+      properties:
+        valueType:
+          default: STRING
+          description: |
+            The value type.
+            * A valueType of STRING will have a stringConfig field present.
+            * A valueType of DEVICE will have a deviceConfig field present.
+            * A valueType of MODE will have a modeConfig field present.
+            * A valueType of SCENE will have a sceneConfig field present.
+            * A valueType of MESSAGE will have a messageConfig field present.
+          enum:
+          - STRING
+          - DEVICE
+          - MODE
+          - SCENE
+          - MESSAGE
+          type: string
+        stringConfig:
+          $ref: '#/components/schemas/StringConfig'
+        deviceConfig:
+          $ref: '#/components/schemas/DeviceConfig'
+        modeConfig:
+          $ref: '#/components/schemas/ModeConfig'
+        sceneConfig:
+          $ref: '#/components/schemas/SceneConfig'
+        messageConfig:
+          $ref: '#/components/schemas/MessageConfig'
+      type: object
+    ConfigEntries:
+      description: A list of available configuration values.
+      items:
+        $ref: '#/components/schemas/ConfigEntry'
+      type: array
+    ConfigMap:
+      additionalProperties:
+        $ref: '#/components/schemas/ConfigEntries'
+      description: |
+        A map of configurations for an Installed App.  The map 'key' is the configuration name
+        and the 'value' is an array of strings.
+      type: object
+    ExecuteData:
+      description: The data payload to an execution request with an AppLifecycle of
+        EXECUTE.
+      example:
+        authToken: authToken
+        installedApp:
+          installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+          locationId: e675a3d9-2499-406c-86dc-8a492a886494
+          config:
+            contactSensor:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                componentId: main
+            lightSwitch:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                componentId: main
+            minutes:
+            - valueType: STRING
+              stringConfig:
+                value: "5"
+          permissions:
+          - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+          - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+        parameters:
+          key: parameters
+      properties:
+        authToken:
+          description: An OAuth token to use when calling into SmartThings API's.
+          type: string
+        installedApp:
+          $ref: '#/components/schemas/InstalledApp'
+        parameters:
+          additionalProperties:
+            type: string
+          description: An arbitrary map of input parameters which the SmartApp can
+            use to build a custom response.
+          type: object
+      required:
+      - authToken
+      - installedApp
+      - parameters
+      type: object
+    AppLifecycle:
+      description: |
+        Every invocation of a SmartApp is associated to a specific lifecycle event.  These lifecycles include:
+        * INSTALL - Lifecycle that will be invoked once at the time of installation of a SmartApp.
+        * UPDATE - Invoked when a user modifies the configuration values assigned to the SmartApp.
+        * UNINSTALL - A clean up lifecycle invoked upon the deletion of an SmartApp from a user's account.
+        * EVENT - Lifecycle event used when the SmartApp is invoked as the result of a subscription or schedule.
+        * PING - Lifecycle used during App creation to verify connectivity, and ownership of a particular target.
+        * CONFIGURATION - Lifecycle used to drive the UX during the installation process of a SmartApp into a user's account.
+        * OAUTH_CALLBACK - Lifecycle used for integrations that implement a third-party OAuth out.
+        * CONFIRMATION - Lifecycle used to send confirmation link to a SmartApp for ownership validation.
+      enum:
+      - INSTALL
+      - UPDATE
+      - UNINSTALL
+      - EVENT
+      - PING
+      - CONFIGURATION
+      - OAUTH_CALLBACK
+      - CONFIRMATION
+      type: string
+    EventData:
+      description: The data payload to an execution request with an AppLifecycle of
+        EVENT.
+      example:
+        authToken: authToken
+        installedApp:
+          installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+          locationId: e675a3d9-2499-406c-86dc-8a492a886494
+          config:
+            contactSensor:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                componentId: main
+            lightSwitch:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                componentId: main
+            minutes:
+            - valueType: STRING
+              stringConfig:
+                value: "5"
+          permissions:
+          - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+          - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+        events:
+        - deviceCommandsEvent:
+            eventId: eventId
+            profileId: profileId
+            externalId: externalId
+            deviceId: deviceId
+            commands:
+            - capability: switch
+              componentId: main
+              arguments: []
+              command: "on"
+            - capability: switch
+              componentId: main
+              arguments: []
+              command: "on"
+          deviceHealthEvent:
+            hubId: hubId
+            eventId: eventId
+            reason: NONE
+            locationId: locationId
+            deviceId: deviceId
+            status: OFFLINE
+          modeEvent:
+            eventId: eventId
+            modeId: modeId
+            locationId: locationId
+          eventTime: 2000-01-23T04:56:07.000+00:00
+          securityArmStateEvent:
+            eventId: eventId
+            armState: UNKNOWN
+            optionalArguments:
+              key:
+                stringValue: stringValue
+                intValue: 0
+                valueType: NULL_VALUE
+                boolValue: true
+                doubleValue: 6.027456183070403
+            locationId: locationId
+          deviceLifecycleEvent:
+            principal: principal
+            eventId: eventId
+            locationId: locationId
+            create: '{}'
+            update: '{}'
+            moveFrom:
+              locationId: locationId
+            deviceId: deviceId
+            deviceName: deviceName
+            delete: '{}'
+            moveTo:
+              locationId: locationId
+          sceneLifecycleEvent:
+            eventId: eventId
+            locationId: locationId
+            sceneId: sceneId
+            create: '{}'
+            update: '{}'
+            delete: '{}'
+          deviceEvent:
+            eventId: 736e3903-001c-4d40-b408-ff40d162a06b
+            capability: motionSensor
+            componentId: main
+            data: '{}'
+            locationId: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+            valueType: number
+            subscriptionName: motion_sensors
+            stateChange: true
+            attribute: motion
+            deviceId: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+            value: active
+          timerEvent:
+            eventId: eventId
+            expression: expression
+            name: lights_off_timeout
+            time: 2000-01-23T04:56:07.000+00:00
+        - deviceCommandsEvent:
+            eventId: eventId
+            profileId: profileId
+            externalId: externalId
+            deviceId: deviceId
+            commands:
+            - capability: switch
+              componentId: main
+              arguments: []
+              command: "on"
+            - capability: switch
+              componentId: main
+              arguments: []
+              command: "on"
+          deviceHealthEvent:
+            hubId: hubId
+            eventId: eventId
+            reason: NONE
+            locationId: locationId
+            deviceId: deviceId
+            status: OFFLINE
+          modeEvent:
+            eventId: eventId
+            modeId: modeId
+            locationId: locationId
+          eventTime: 2000-01-23T04:56:07.000+00:00
+          securityArmStateEvent:
+            eventId: eventId
+            armState: UNKNOWN
+            optionalArguments:
+              key:
+                stringValue: stringValue
+                intValue: 0
+                valueType: NULL_VALUE
+                boolValue: true
+                doubleValue: 6.027456183070403
+            locationId: locationId
+          deviceLifecycleEvent:
+            principal: principal
+            eventId: eventId
+            locationId: locationId
+            create: '{}'
+            update: '{}'
+            moveFrom:
+              locationId: locationId
+            deviceId: deviceId
+            deviceName: deviceName
+            delete: '{}'
+            moveTo:
+              locationId: locationId
+          sceneLifecycleEvent:
+            eventId: eventId
+            locationId: locationId
+            sceneId: sceneId
+            create: '{}'
+            update: '{}'
+            delete: '{}'
+          deviceEvent:
+            eventId: 736e3903-001c-4d40-b408-ff40d162a06b
+            capability: motionSensor
+            componentId: main
+            data: '{}'
+            locationId: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+            valueType: number
+            subscriptionName: motion_sensors
+            stateChange: true
+            attribute: motion
+            deviceId: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+            value: active
+          timerEvent:
+            eventId: eventId
+            expression: expression
+            name: lights_off_timeout
+            time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        authToken:
+          description: An OAuth token to use when calling into SmartThings API's.
+          type: string
+        installedApp:
+          $ref: '#/components/schemas/InstalledApp'
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+          type: array
+      required:
+      - authToken
+      - installedApp
+      type: object
+    InstallData:
+      description: The data payload to an execution request with an AppLifecycle of
+        INSTALL.
+      example:
+        authToken: authToken
+        installedApp:
+          installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+          locationId: e675a3d9-2499-406c-86dc-8a492a886494
+          config:
+            contactSensor:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                componentId: main
+            lightSwitch:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                componentId: main
+            minutes:
+            - valueType: STRING
+              stringConfig:
+                value: "5"
+          permissions:
+          - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+          - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+        refreshToken: refreshToken
+      properties:
+        authToken:
+          description: An OAuth token to use when calling into SmartThings API's.
+          type: string
+        refreshToken:
+          description: |
+            A refresh token which maybe used to obtain authorization to SmartThings API after expiration of the authToken.
+            An integration will need to use this refreshToken to support calling the SmartThings API outside the context
+            of an event.
+          type: string
+        installedApp:
+          $ref: '#/components/schemas/InstalledApp'
+      required:
+      - authToken
+      - installedApp
+      - refreshToken
+      type: object
+    UpdateData:
+      description: The data payload to an execution request with an AppLifecycle of
+        UPDATE.
+      example:
+        authToken: authToken
+        installedApp:
+          installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+          locationId: e675a3d9-2499-406c-86dc-8a492a886494
+          config:
+            contactSensor:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                componentId: main
+            lightSwitch:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                componentId: main
+            minutes:
+            - valueType: STRING
+              stringConfig:
+                value: "5"
+          permissions:
+          - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+          - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+        previousPermissions:
+        - previousPermissions
+        - previousPermissions
+        previousConfig: {}
+        refreshToken: refreshToken
+      properties:
+        authToken:
+          description: An OAuth token to use when calling into SmartThings API's.
+          type: string
+        refreshToken:
+          description: |
+            A refresh token which maybe used to obtain authorization to SmartThings API after expiration of the authToken.
+            An integration will need to use this refreshToken to support calling the SmartThings API outside the context
+            of an event.
+          type: string
+        installedApp:
+          $ref: '#/components/schemas/InstalledApp'
+        previousConfig:
+          additionalProperties:
+            $ref: '#/components/schemas/ConfigEntries'
+          description: |
+            A map of configurations for an Installed App.  The map 'key' is the configuration name
+            and the 'value' is an array of strings.
+          type: object
+        previousPermissions:
+          description: A list of permissions associated with this execution. See `securityDefinitions`
+            for more information.
+          items:
+            type: string
+          type: array
+      required:
+      - authToken
+      - installedApp
+      - previousConfig
+      - previousPermissions
+      type: object
+    UninstallData:
+      description: The data payload to an execution request with an AppLifecycle of
+        UNINSTALL.
+      example:
+        installedApp:
+          installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+          locationId: e675a3d9-2499-406c-86dc-8a492a886494
+          config:
+            contactSensor:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                componentId: main
+            lightSwitch:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                componentId: main
+            minutes:
+            - valueType: STRING
+              stringConfig:
+                value: "5"
+          permissions:
+          - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+          - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+      properties:
+        installedApp:
+          $ref: '#/components/schemas/InstalledApp'
+      required:
+      - installedApp
+      type: object
+    InstalledApp:
+      description: The information associated with this installed app.
+      example:
+        installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+        locationId: e675a3d9-2499-406c-86dc-8a492a886494
+        config:
+          contactSensor:
+          - valueType: DEVICE
+            deviceConfig:
+              deviceId: e457978e-5e37-43e6-979d-18112e12c961
+              componentId: main
+          lightSwitch:
+          - valueType: DEVICE
+            deviceConfig:
+              deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+              componentId: main
+          minutes:
+          - valueType: STRING
+            stringConfig:
+              value: "5"
+        permissions:
+        - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+        - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+        - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+      properties:
+        installedAppId:
+          description: The id of the installed app.
+          format: uuid
+          type: string
+        locationId:
+          description: The location that the installed App is associated with
+          format: ^(?:([0-9a-fA-F]{32})|([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}))$
+          type: string
+        config:
+          additionalProperties:
+            $ref: '#/components/schemas/ConfigEntries'
+          description: |
+            A map of configurations for an Installed App.  The map 'key' is the configuration name
+            and the 'value' is an array of strings.
+          type: object
+        permissions:
+          description: A list of permissions associated with this execution. See `securityDefinitions`
+            for more information.
+          items:
+            type: string
+          type: array
+      type: object
+    PingData:
+      description: |
+        A request to ping a SmartApp to ensure connectivity.
+      example:
+        challenge: challenge
+      properties:
+        challenge:
+          description: A challenge phrase that the SmartApp must echo back to validate
+            itself.
+          type: string
+      required:
+      - challenge
+      type: object
+    ConfirmationData:
+      description: |
+        A request to send a confirmation link to a SmartApp for ownership validation.
+        type: object
+      example:
+        confirmationUrl: http://example.com/aeiou
+        appId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        appId:
+          description: A globally unique identifier for an app.
+          format: uuid
+          type: string
+        confirmationUrl:
+          description: |
+            An HTTPS url that may be visted to confirm / activate an App registration.
+          format: url
+          type: string
+      type: object
+    ConfigurationData:
+      description: |
+        A request for a pages flow to drive app installation.  This will only be available for executions of type "CONFIGURATION".
+      example:
+        installedAppId: installedAppId
+        pageId: pageId
+        config: {}
+        previousPageId: previousPageId
+      properties:
+        installedAppId:
+          description: The id of the installed app.
+          format: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        phase:
+          $ref: '#/components/schemas/ConfigurationPhase'
+        pageId:
+          description: A developer defined page ID. Must be URL safe characters.
+          format: ^[a-zA-Z0-9.-_]{1,36}$
+          type: string
+        previousPageId:
+          description: The previous page the user completed. Must be URL safe characters.
+          format: ^[a-zA-Z0-9.-_]{1,36}$
+          type: string
+        config:
+          additionalProperties:
+            $ref: '#/components/schemas/ConfigEntries'
+          description: |
+            A map of configurations for an Installed App.  The map 'key' is the configuration name
+            and the 'value' is an array of strings.
+          type: object
+      required:
+      - phase
+      type: object
+    OAuthCallbackData:
+      description: |
+        Provides intergration with the result of a third party oauth attempt.  This will only be available for executions of type "OAUTH_CALLBACK".
+      example:
+        installedAppId: installedAppId
+        urlPath: urlPath
+      properties:
+        installedAppId:
+          description: The id of the installed app.
+          format: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+        urlPath:
+          description: |
+            A relative URL containing all of the query string parameters as returned by the third party oauth system. A SmartApp can
+            parse the `urlPath` property to extract any senstive auth codes/tokens which can then be used to access the third party system.
+          type: string
+      type: object
+    EventResponseData:
+      description: |
+        Empty object response for an Event lifecycle execution.
+      type: object
+    InstallResponseData:
+      description: |
+        Empty object response for an Install lifecycle execution.
+      type: object
+    UpdateResponseData:
+      description: |
+        Empty object response for an Update lifecycle execution.
+      type: object
+    UninstallResponseData:
+      description: |
+        Empty object response for an Uninstall lifecycle execution.
+      type: object
+    ConfigurationResponseData:
+      description: |
+        Expected response for a Configuration lifecycle execution.  ConfigurationResponseData follows a compositional
+        structure.
+        * When a request is made for the INITIALIZE phase, a InitializeInstall model should be returned.
+        * When a request is made for the PAGE phase, a Page model should be returned.
+      example:
+        page:
+          nextPageId: nextPageId
+          nextText: nextText
+          name: name
+          style: NORMAL
+          pageId: pageId
+          complete: false
+          sections:
+          - settings:
+            - null
+            - null
+            hidden: false
+            hideable: false
+            name: name
+            style: NORMAL
+          - settings:
+            - null
+            - null
+            hidden: false
+            hideable: false
+            name: name
+            style: NORMAL
+          previousPageId: previousPageId
+      properties:
+        initialize:
+          $ref: '#/components/schemas/InitializeSetting'
+        page:
+          $ref: '#/components/schemas/Page'
+      type: object
+    PingResponseData:
+      description: |
+        Expected response for a Ping lifecycle execution.
+      example:
+        challenge: challenge
+      properties:
+        challenge:
+          description: An echo of the challenge that was provided on the request.
+          type: string
+      type: object
+    OAuthCallbackResponseData:
+      description: |
+        Empty object response for an OAuth Callback lifecycle execution.
+      type: object
+    Page:
+      example:
+        nextPageId: nextPageId
+        nextText: nextText
+        name: name
+        style: NORMAL
+        pageId: pageId
+        complete: false
+        sections:
+        - settings:
+          - null
+          - null
+          hidden: false
+          hideable: false
+          name: name
+          style: NORMAL
+        - settings:
+          - null
+          - null
+          hidden: false
+          hideable: false
+          name: name
+          style: NORMAL
+        previousPageId: previousPageId
+      properties:
+        name:
+          description: Name of the page to be configured.
+          maxLength: 128
+          type: string
+        pageId:
+          description: A developer defined page ID. Must be URL safe characters.
+          format: ^[a-zA-Z0-9.-_]{1,36}$
+          type: string
+        nextPageId:
+          description: A developer defined page ID for the next page in the configuration
+            process. Must be URL safe characters.
+          format: ^[a-zA-Z0-9.-_]{1,36}$
+          type: string
+        previousPageId:
+          description: A developer defined page ID for the previous page in the configuration
+            process. Must be URL safe characters.
+          format: ^[a-zA-Z0-9.-_]{1,36}$
+          type: string
+        complete:
+          default: false
+          description: Indicates if this is the last page in the configuration process.
+          type: boolean
+        style:
+          default: NORMAL
+          description: Change how the page is presented
+          enum:
+          - NORMAL
+          - SPLASH
+          type: string
+        nextText:
+          description: The text for the next button. Only applies if style is `SPLASH`
+          maxLength: 128
+          type: string
+        sections:
+          description: The display sections for user defined settings.
+          items:
+            $ref: '#/components/schemas/Section'
+          type: array
+      type: object
+    Section:
+      example:
+        settings:
+        - null
+        - null
+        hidden: false
+        hideable: false
+        name: name
+        style: NORMAL
+      properties:
+        name:
+          description: Name of the section.
+          maxLength: 128
+          type: string
+        hideable:
+          default: false
+          description: Whether or not the section can be collapsed
+          type: boolean
+        hidden:
+          default: false
+          description: If section can be collapsed, whether or not it defaults to
+            hidden
+          type: boolean
+        style:
+          default: NORMAL
+          description: Change how the section is presented
+          enum:
+          - NORMAL
+          - FOOTER
+          type: string
+        settings:
+          description: |
+            Configuration settings represent the questions asked to the end user installing an integration the answers to
+            which provide the configuration for which the integration will use when executing. Settings follow an inheritance
+            pattern.  The type field dictates the expected instance of setting that is provided.
+          items:
+            $ref: '#/components/schemas/SectionSetting'
+          type: array
+      type: object
+    ConfigurationPhase:
+      description: Denotes the current installation phase.
+      enum:
+      - INITIALIZE
+      - PAGE
+      type: string
+    SettingType:
+      description: Denotes the type of setting.
+      enum:
+      - DEVICE
+      - DATE
+      - TEXT
+      - PASSWORD
+      - BOOLEAN
+      - ENUM
+      - MODE
+      - SCENE
+      - LINK
+      - PAGE
+      - IMAGE
+      - IMAGES
+      - VIDEO
+      - TIME
+      - PARAGRAPH
+      - EMAIL
+      - DECIMAL
+      - NUMBER
+      - PHONE
+      - OAUTH
+      - SOUND
+      - COLOR
+      - MESSAGE_GROUP
+      type: string
+    StyleType:
+      description: Style of the setting.
+      enum:
+      - COMPLETE
+      - ERROR
+      - DEFAULT
+      type: string
+    EnumStyleType:
+      description: Style of the setting.
+      enum:
+      - COMPLETE
+      - ERROR
+      - DEFAULT
+      - DROPDOWN
+      type: string
+    LinkStyleType:
+      description: Style of the setting.
+      enum:
+      - COMPLETE
+      - ERROR
+      - DEFAULT
+      - BUTTON
+      type: string
+    Setting:
+      properties:
+        id:
+          description: A developer defined configuration ID.
+          format: ^[a-zA-Z0-9.-_]+$
+          maxLength: 128
+          type: string
+        name:
+          description: Name of the setting to be configured.
+          maxLength: 128
+          type: string
+        description:
+          description: Description of the app to be configured.
+          maxLength: 2048
+          type: string
+      type: object
+    InitializeSetting:
+      allOf:
+      - $ref: '#/components/schemas/Setting'
+      - $ref: '#/components/schemas/InitializeSetting_allOf'
+      description: The initial setting to be returned when starting a new configuration
+        install.
+    SectionSetting:
+      allOf:
+      - $ref: '#/components/schemas/Setting'
+      - $ref: '#/components/schemas/SectionSetting_allOf'
+    DeviceSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/DeviceSetting_allOf'
+      description: Device Setting
+      x-discriminator-value: DEVICE
+    OAuthSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/OAuthSetting_allOf'
+      description: OAuth Setting
+      x-discriminator-value: OAUTH
+    TimeSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/TimeSetting_allOf'
+      description: Time Setting
+      x-discriminator-value: TIME
+    TextSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/TextSetting_allOf'
+      description: Text Setting
+      x-discriminator-value: TEXT
+    PasswordSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/PasswordSetting_allOf'
+      description: Password Setting
+      x-discriminator-value: PASSWORD
+    PhoneSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/PhoneSetting_allOf'
+      description: Phone Setting
+      x-discriminator-value: PHONE
+    EmailSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/PhoneSetting_allOf'
+      description: Email Setting
+      x-discriminator-value: EMAIL
+    NumberSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/NumberSetting_allOf'
+      description: Number Setting
+      x-discriminator-value: NUMBER
+    DecimalSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/DecimalSetting_allOf'
+      description: DECIMAL Setting
+      x-discriminator-value: DECIMAL
+    BooleanSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/BooleanSetting_allOf'
+      description: Boolean Setting
+      x-discriminator-value: BOOLEAN
+    ParagraphSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/PhoneSetting_allOf'
+      description: Paragraph Setting
+      x-discriminator-value: PARAGRAPH
+    LinkSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/LinkSetting_allOf'
+      description: URL link Setting
+      x-discriminator-value: LINK
+    PageSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/PageSetting_allOf'
+      description: Jump to page Setting
+      x-discriminator-value: PAGE
+    ImageSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/PhoneSetting_allOf'
+      description: Image Setting
+      x-discriminator-value: IMAGE
+    ImagesSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/ImagesSetting_allOf'
+      description: Images Setting
+      x-discriminator-value: IMAGES
+    VideoSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/VideoSetting_allOf'
+      description: Video Setting
+      x-discriminator-value: VIDEO
+    EnumSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/EnumSetting_allOf'
+      description: Enum Setting
+      x-discriminator-value: ENUM
+    ModeSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/ModeSetting_allOf'
+      description: Mode Setting
+      x-discriminator-value: MODE
+    SceneSetting:
+      allOf:
+      - $ref: '#/components/schemas/SectionSetting'
+      - $ref: '#/components/schemas/SceneSetting_allOf'
+      description: Scene Setting
+      x-discriminator-value: SCENE
+    GroupedOption:
+      properties:
+        name:
+          description: The display name of this group of enum options.
+          maxLength: 128
+          type: string
+        options:
+          description: The enum options.
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+      type: object
+    Option:
+      properties:
+        id:
+          description: The unique ID for this option.
+          maxLength: 128
+          type: string
+        name:
+          description: The display name for this option.
+          maxLength: 128
+          type: string
+      type: object
+    ClientDetails:
+      description: |
+        Known details about the client application from which the request was initiated.  This information is provided
+        on best effort basis.  All properties maybe null or empty.
+      example:
+        supportedTemplates:
+        - BASIC_V1
+        - BASIC_V1
+        os: os
+        language: language
+        version: version
+      properties:
+        os:
+          description: The operating system of the client application initiating the
+            request.
+          maxLength: 16
+          type: string
+        version:
+          description: The version of the client application initiating the request.
+          maxLength: 16
+          type: string
+        language:
+          description: Language header representing the client's preferred language.
+            The format of the `Accept-Language` header follows what is defined in
+            [RFC 7231, section 5.3.5](https://tools.ietf.org/html/rfc7231#section-5.3.5)
+          maxLength: 250
+          type: string
+        supportedTemplates:
+          description: Templates that could be renderable in the client
+          items:
+            enum:
+            - BASIC_V1
+            - BASIC_V2
+            type: string
+          type: array
+      type: object
+    DashboardData:
+      description: The data payload to an execution request with an AppLifecycle of
+        DASHBOARD.
+      example:
+        authToken: authToken
+        installedApp:
+          installedAppId: d692699d-e7a6-400d-a0b7-d5be96e7a564
+          locationId: e675a3d9-2499-406c-86dc-8a492a886494
+          config:
+            contactSensor:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: e457978e-5e37-43e6-979d-18112e12c961
+                componentId: main
+            lightSwitch:
+            - valueType: DEVICE
+              deviceConfig:
+                deviceId: 74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+                componentId: main
+            minutes:
+            - valueType: STRING
+              stringConfig:
+                value: "5"
+          permissions:
+          - r:devices:e457978e-5e37-43e6-979d-18112e12c961
+          - r:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+          - x:devices:74aac3bb-91f2-4a88-8c49-ae5e0a234d76
+      properties:
+        authToken:
+          description: An OAuth token to use when calling into SmartThings API's.
+          type: string
+        installedApp:
+          $ref: '#/components/schemas/InstalledApp'
+      required:
+      - authToken
+      - installedApp
+      type: object
+    DashboardResponseData:
+      description: |
+        Expected response for a Dashboard lifecycle execution.
+      example:
+        cards:
+        - basicV2:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            name: Smart Home Monitor
+            description: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image.png
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                url: https://openapi-generator.tech
+              text:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                content: content
+              items:
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+          cardId: some-card-id
+          basicV1:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            name: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                name: name
+                url: https://openapi-generator.tech
+              text:
+                content: content
+          freeForm:
+            attributes:
+              key: attributes
+        - basicV2:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            name: Smart Home Monitor
+            description: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image.png
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                url: https://openapi-generator.tech
+              text:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                content: content
+              items:
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+          cardId: some-card-id
+          basicV1:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            name: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                name: name
+                url: https://openapi-generator.tech
+              text:
+                content: content
+          freeForm:
+            attributes:
+              key: attributes
+        - basicV2:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            name: Smart Home Monitor
+            description: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image.png
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                url: https://openapi-generator.tech
+              text:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                content: content
+              items:
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+          cardId: some-card-id
+          basicV1:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            name: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                name: name
+                url: https://openapi-generator.tech
+              text:
+                content: content
+          freeForm:
+            attributes:
+              key: attributes
+        - basicV2:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            name: Smart Home Monitor
+            description: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image.png
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                url: https://openapi-generator.tech
+              text:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                content: content
+              items:
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+          cardId: some-card-id
+          basicV1:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            name: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                name: name
+                url: https://openapi-generator.tech
+              text:
+                content: content
+          freeForm:
+            attributes:
+              key: attributes
+        - basicV2:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                pressedIconUrl: https://smart-home-monitor.com/image.png
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                releasedIconUrl: https://smart-home-monitor.com/image.png
+            name: Smart Home Monitor
+            description: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image.png
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                url: https://openapi-generator.tech
+              text:
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                content: content
+              items:
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+              - item:
+                  description: description
+                  action:
+                    launchPlugin:
+                      pluginId: pluginId
+                      uri: uri
+                    execute:
+                      parameters:
+                        key: parameters
+                  bgImage:
+                    color: color
+                    alpha: 6.027456183070403
+                    url: https://openapi-generator.tech
+                  url: https://openapi-generator.tech
+          cardId: some-card-id
+          basicV1:
+            buttons:
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            - textButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+              iconButton:
+                name: name
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                iconUrl: https://openapi-generator.tech
+            name: Smart Home Monitor
+            iconUrl: https://smart-home-monitor.com/image
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            body:
+              image:
+                name: name
+                url: https://openapi-generator.tech
+              text:
+                content: content
+          freeForm:
+            attributes:
+              key: attributes
+        serviceName: serviceName
+      properties:
+        serviceName:
+          description: A unique identifier for a card of service
+          format: some service name
+          type: string
+        cards:
+          description: list of card object
+          items:
+            $ref: '#/components/schemas/DashboardCard'
+          maxItems: 5
+          minItems: 1
+          type: array
+      type: object
+    DashboardCardTemplate:
+      description: |
+        A directive to the SmartThings client to use a specific template for rendering the dashboard card.
+        Each card template may have a different set requirement for data needs.
+
+        * BASIC_V1 - The basic / default template.
+        * FREE_FORM - A free form template with minimal constraints.
+      enum:
+      - BASIC_V1
+      - BASIC_V2
+      - FREE_FORM
+      type: string
+    DashboardCard:
+      description: payload of dashboard card
+      example:
+        basicV2:
+          buttons:
+          - textButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+            iconButton:
+              name: name
+              pressedIconUrl: https://smart-home-monitor.com/image.png
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              releasedIconUrl: https://smart-home-monitor.com/image.png
+          - textButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+            iconButton:
+              name: name
+              pressedIconUrl: https://smart-home-monitor.com/image.png
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              releasedIconUrl: https://smart-home-monitor.com/image.png
+          - textButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+            iconButton:
+              name: name
+              pressedIconUrl: https://smart-home-monitor.com/image.png
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              releasedIconUrl: https://smart-home-monitor.com/image.png
+          name: Smart Home Monitor
+          description: Smart Home Monitor
+          iconUrl: https://smart-home-monitor.com/image.png
+          bgImage:
+            color: color
+            alpha: 6.027456183070403
+            url: https://openapi-generator.tech
+          body:
+            image:
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              url: https://openapi-generator.tech
+            text:
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              content: content
+            items:
+            - item:
+                description: description
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                bgImage:
+                  color: color
+                  alpha: 6.027456183070403
+                  url: https://openapi-generator.tech
+                url: https://openapi-generator.tech
+            - item:
+                description: description
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                bgImage:
+                  color: color
+                  alpha: 6.027456183070403
+                  url: https://openapi-generator.tech
+                url: https://openapi-generator.tech
+            - item:
+                description: description
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                bgImage:
+                  color: color
+                  alpha: 6.027456183070403
+                  url: https://openapi-generator.tech
+                url: https://openapi-generator.tech
+            - item:
+                description: description
+                action:
+                  launchPlugin:
+                    pluginId: pluginId
+                    uri: uri
+                  execute:
+                    parameters:
+                      key: parameters
+                bgImage:
+                  color: color
+                  alpha: 6.027456183070403
+                  url: https://openapi-generator.tech
+                url: https://openapi-generator.tech
+        cardId: some-card-id
+        basicV1:
+          buttons:
+          - textButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+            iconButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              iconUrl: https://openapi-generator.tech
+          - textButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+            iconButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              iconUrl: https://openapi-generator.tech
+          - textButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+            iconButton:
+              name: name
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              iconUrl: https://openapi-generator.tech
+          name: Smart Home Monitor
+          iconUrl: https://smart-home-monitor.com/image
+          bgImage:
+            color: color
+            alpha: 6.027456183070403
+            url: https://openapi-generator.tech
+          body:
+            image:
+              name: name
+              url: https://openapi-generator.tech
+            text:
+              content: content
+        freeForm:
+          attributes:
+            key: attributes
+      properties:
+        templateId:
+          $ref: '#/components/schemas/DashboardCardTemplate'
+        cardId:
+          description: A unique identifier for a card of service
+          example: some-card-id
+          format: ^[a-z0-9.-_]{1,36}$
+          type: string
+        basicV1:
+          $ref: '#/components/schemas/BasicCard'
+        basicV2:
+          $ref: '#/components/schemas/BasicV2Card'
+        freeForm:
+          $ref: '#/components/schemas/FreeFormCard'
+      required:
+      - cardId
+      - templateId
+      type: object
+    BasicCard:
+      description: Data requirements for a Basic V1 card template.
+      example:
+        buttons:
+        - textButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+          iconButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            iconUrl: https://openapi-generator.tech
+        - textButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+          iconButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            iconUrl: https://openapi-generator.tech
+        - textButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+          iconButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            iconUrl: https://openapi-generator.tech
+        name: Smart Home Monitor
+        iconUrl: https://smart-home-monitor.com/image
+        bgImage:
+          color: color
+          alpha: 6.027456183070403
+          url: https://openapi-generator.tech
+        body:
+          image:
+            name: name
+            url: https://openapi-generator.tech
+          text:
+            content: content
+      properties:
+        name:
+          description: name of the card
+          example: Smart Home Monitor
+          maxLength: 100
+          type: string
+        iconUrl:
+          description: A title icon url for card. Angit  HTTPS URL is required.
+          example: https://smart-home-monitor.com/image
+          format: uri
+          maxLength: 250
+          type: string
+        bgImage:
+          $ref: '#/components/schemas/BasicBackgroundImage'
+        body:
+          $ref: '#/components/schemas/BasicBody'
+        buttons:
+          description: A list of buttons to render and buttons must be of the same
+            type.
+          items:
+            $ref: '#/components/schemas/BasicButton'
+          maxItems: 3
+          type: array
+      type: object
+    BasicV2Card:
+      description: Data requirements for a Basic V2 card template.
+      example:
+        buttons:
+        - textButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+          iconButton:
+            name: name
+            pressedIconUrl: https://smart-home-monitor.com/image.png
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            releasedIconUrl: https://smart-home-monitor.com/image.png
+        - textButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+          iconButton:
+            name: name
+            pressedIconUrl: https://smart-home-monitor.com/image.png
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            releasedIconUrl: https://smart-home-monitor.com/image.png
+        - textButton:
+            name: name
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+          iconButton:
+            name: name
+            pressedIconUrl: https://smart-home-monitor.com/image.png
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            releasedIconUrl: https://smart-home-monitor.com/image.png
+        name: Smart Home Monitor
+        description: Smart Home Monitor
+        iconUrl: https://smart-home-monitor.com/image.png
+        bgImage:
+          color: color
+          alpha: 6.027456183070403
+          url: https://openapi-generator.tech
+        body:
+          image:
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            url: https://openapi-generator.tech
+          text:
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            content: content
+          items:
+          - item:
+              description: description
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              url: https://openapi-generator.tech
+          - item:
+              description: description
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              url: https://openapi-generator.tech
+          - item:
+              description: description
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              url: https://openapi-generator.tech
+          - item:
+              description: description
+              action:
+                launchPlugin:
+                  pluginId: pluginId
+                  uri: uri
+                execute:
+                  parameters:
+                    key: parameters
+              bgImage:
+                color: color
+                alpha: 6.027456183070403
+                url: https://openapi-generator.tech
+              url: https://openapi-generator.tech
+      properties:
+        iconUrl:
+          description: An title icon url for card. A HTTPS URL is required.
+          example: https://smart-home-monitor.com/image.png
+          format: uri
+          maxLength: 250
+          type: string
+        name:
+          description: name of the card
+          example: Smart Home Monitor
+          maxLength: 250
+          type: string
+        description:
+          description: sublined text of the card
+          example: Smart Home Monitor
+          maxLength: 250
+          type: string
+        bgImage:
+          $ref: '#/components/schemas/BasicBackgroundImage'
+        body:
+          $ref: '#/components/schemas/BasicV2Body'
+        buttons:
+          description: A list of buttons to render and buttons must be of the same
+            type.
+          items:
+            $ref: '#/components/schemas/BasicV2Button'
+          maxItems: 3
+          type: array
+      type: object
+    FreeFormCard:
+      example:
+        attributes:
+          key: attributes
+      properties:
+        attributes:
+          additionalProperties:
+            type: string
+          description: |
+            An arbitrary set of key / value pairs useful for passing any custom metadata.
+
+            * Supports a maximum of 5 entries.
+            * Maximum key length: 36 Unicode characters in UTF-8
+            * Maximum value length: 1000 Unicode characters in UTF-8
+            * Allowed characters for *keys* are letters, plus the following special characters: `:`, `_`
+            * Allowed characters for *values* are letters, whitespace, and numbers, plus the following special characters: `+`, `-`, `=`, `.`, `_`, `:`, `/`
+            * If you need characters outside this allowed set, you can apply standard base-64 encoding.
+          type: object
+      type: object
+    BasicBackgroundImage:
+      description: A background image.
+      example:
+        color: color
+        alpha: 6.027456183070403
+        url: https://openapi-generator.tech
+      properties:
+        url:
+          description: URL of image.  HTTPS url is required.
+          format: uri
+          maxLength: 250
+          type: string
+        color:
+          description: some color code
+          format: ^[a-fA-F0-9]{6}$
+          type: string
+        alpha:
+          description: transparency of the color/image
+          format: ^[0-1]{1}$
+          type: number
+      type: object
+    BasicImagePosition:
+      description: Position of where the image should be rendered within card.
+      enum:
+      - LEFT
+      - CENTER
+      - RIGHT
+      type: string
+    BasicImage:
+      example:
+        name: name
+        url: https://openapi-generator.tech
+      properties:
+        name:
+          description: An icon name.
+          maxLength: 100
+          type: string
+        position:
+          $ref: '#/components/schemas/BasicImagePosition'
+        url:
+          description: URL of image.  HTTPS url is required.
+          format: uri
+          maxLength: 250
+          type: string
+      type: object
+    BasicText:
+      description: A text object.
+      example:
+        content: content
+      properties:
+        content:
+          description: Text to display.
+          maxLength: 500
+          type: string
+      type: object
+    BasicBody:
+      description: Body definition for a Basic V1 template.
+      example:
+        image:
+          name: name
+          url: https://openapi-generator.tech
+        text:
+          content: content
+      properties:
+        image:
+          $ref: '#/components/schemas/BasicImage'
+        text:
+          $ref: '#/components/schemas/BasicText'
+      type: object
+    BasicButtonType:
+      description: |
+        The type of buttons to render.
+
+        * TEXT - A colored button with a text overrlay.
+        * ICON - A button with an image backgroup and text overrlay.
+      enum:
+      - TEXT
+      - ICON
+      type: string
+    BasicTextButton:
+      description: A text button definition for a basic template.
+      example:
+        name: name
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+      properties:
+        name:
+          description: The name of the button
+          maxLength: 100
+          type: string
+        position:
+          $ref: '#/components/schemas/BasicButtonPosition'
+        action:
+          $ref: '#/components/schemas/Action'
+      type: object
+    BasicIconButton:
+      description: A text button definition for a basic template.
+      example:
+        name: name
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+        iconUrl: https://openapi-generator.tech
+      properties:
+        name:
+          description: The name of the button
+          maxLength: 100
+          type: string
+        position:
+          $ref: '#/components/schemas/BasicButtonPosition'
+        action:
+          $ref: '#/components/schemas/Action'
+        iconUrl:
+          description: A default icon image url. HTTPS url required.
+          format: uri
+          maxLength: 250
+          type: string
+      type: object
+    BasicButtonPosition:
+      description: Position of where the button should be rendered within card.
+      enum:
+      - LEFT
+      - CENTER
+      - RIGHT
+      type: string
+    BasicButton:
+      description: A button definition for a Basic V1 template.
+      example:
+        textButton:
+          name: name
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+        iconButton:
+          name: name
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+          iconUrl: https://openapi-generator.tech
+      properties:
+        type:
+          $ref: '#/components/schemas/BasicButtonType'
+        textButton:
+          $ref: '#/components/schemas/BasicTextButton'
+        iconButton:
+          $ref: '#/components/schemas/BasicIconButton'
+      type: object
+    ActionType:
+      description: |
+        The type of action to take when UI element is activated.
+
+        * LAUNCH_PLUGIN - Launch a corresponding UI plugin.
+        * EXECUTE - Execute an API call to the backing SmartApp.
+      enum:
+      - LAUNCH_PLUGIN
+      - EXECUTE
+      type: string
+    LaunchPluginAction:
+      description: Launch a backing UI plugin in SmartThings Client.
+      example:
+        pluginId: pluginId
+        uri: uri
+      properties:
+        pluginId:
+          description: The ID of the plugin to launch.
+          format: ^[a-zA-Z._]{1,99}$
+          type: string
+        uri:
+          description: parameter to be passed to plugin
+          type: string
+      type: object
+    ExecuteAction:
+      description: Call the EXECUTE lifecycle on the backing SmartApp.
+      example:
+        parameters:
+          key: parameters
+      properties:
+        parameters:
+          additionalProperties:
+            type: string
+          description: An arbitrary map of input parameters which the SmartApp can
+            use to build a custom response.
+          type: object
+      type: object
+    Action:
+      description: A definition of the action to be taken when button is activated.
+      example:
+        launchPlugin:
+          pluginId: pluginId
+          uri: uri
+        execute:
+          parameters:
+            key: parameters
+      properties:
+        type:
+          $ref: '#/components/schemas/ActionType'
+        launchPlugin:
+          $ref: '#/components/schemas/LaunchPluginAction'
+        execute:
+          $ref: '#/components/schemas/ExecuteAction'
+      type: object
+    BasicV2Body:
+      description: Body definition for a Basic V2 template.
+      example:
+        image:
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+          url: https://openapi-generator.tech
+        text:
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+          content: content
+        items:
+        - item:
+            description: description
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            url: https://openapi-generator.tech
+        - item:
+            description: description
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            url: https://openapi-generator.tech
+        - item:
+            description: description
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            url: https://openapi-generator.tech
+        - item:
+            description: description
+            action:
+              launchPlugin:
+                pluginId: pluginId
+                uri: uri
+              execute:
+                parameters:
+                  key: parameters
+            bgImage:
+              color: color
+              alpha: 6.027456183070403
+              url: https://openapi-generator.tech
+            url: https://openapi-generator.tech
+      properties:
+        image:
+          $ref: '#/components/schemas/BasicV2Image'
+        items:
+          description: Body item array definition for a Basic V2 template
+          items:
+            $ref: '#/components/schemas/BasicV2Item'
+          maxItems: 4
+          type: array
+        text:
+          $ref: '#/components/schemas/BasicV2Text'
+      type: object
+    BasicV2Image:
+      example:
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+        url: https://openapi-generator.tech
+      properties:
+        position:
+          $ref: '#/components/schemas/BasicImagePosition'
+        url:
+          description: URL of image.  HTTPS url is required.
+          format: uri
+          maxLength: 250
+          type: string
+        action:
+          $ref: '#/components/schemas/Action'
+      type: object
+    BasicV2Items:
+      description: Body item array definition for a Basic V2 template
+      items:
+        $ref: '#/components/schemas/BasicV2Item'
+      maxItems: 4
+      type: array
+    BasicV2Item:
+      description: Item in Basic V2 items
+      example:
+        item:
+          description: description
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+          bgImage:
+            color: color
+            alpha: 6.027456183070403
+            url: https://openapi-generator.tech
+          url: https://openapi-generator.tech
+      properties:
+        item:
+          $ref: '#/components/schemas/BasicV2ImageItem'
+      type: object
+    BasicV2ImageItem:
+      description: Body item object definition for a Basic V2 template
+      example:
+        description: description
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+        bgImage:
+          color: color
+          alpha: 6.027456183070403
+          url: https://openapi-generator.tech
+        url: https://openapi-generator.tech
+      properties:
+        url:
+          description: URL of image.  HTTPS url is required.
+          format: uri
+          maxLength: 250
+          type: string
+        description:
+          description: The text that would be shown under image
+          maxLength: 250
+          type: string
+        bgImage:
+          $ref: '#/components/schemas/BasicBackgroundImage'
+        action:
+          $ref: '#/components/schemas/Action'
+      type: object
+    BasicV2Text:
+      description: A text object.
+      example:
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+        content: content
+      properties:
+        content:
+          description: Text to display.
+          maxLength: 500
+          type: string
+        action:
+          $ref: '#/components/schemas/Action'
+      type: object
+    BasicV2Button:
+      description: A button definition for a Basic V2 template.
+      example:
+        textButton:
+          name: name
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+        iconButton:
+          name: name
+          pressedIconUrl: https://smart-home-monitor.com/image.png
+          action:
+            launchPlugin:
+              pluginId: pluginId
+              uri: uri
+            execute:
+              parameters:
+                key: parameters
+          releasedIconUrl: https://smart-home-monitor.com/image.png
+      properties:
+        type:
+          $ref: '#/components/schemas/BasicButtonType'
+        textButton:
+          $ref: '#/components/schemas/BasicV2TextButton'
+        iconButton:
+          $ref: '#/components/schemas/BasicV2IconButton'
+      type: object
+    BasicV2TextButton:
+      description: A text button definition for a basic V2 template.
+      example:
+        name: name
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+      properties:
+        name:
+          description: The name of the button
+          maxLength: 100
+          type: string
+        action:
+          $ref: '#/components/schemas/Action'
+      type: object
+    BasicV2IconButton:
+      description: A text button definition for a basic V2 template.
+      example:
+        name: name
+        pressedIconUrl: https://smart-home-monitor.com/image.png
+        action:
+          launchPlugin:
+            pluginId: pluginId
+            uri: uri
+          execute:
+            parameters:
+              key: parameters
+        releasedIconUrl: https://smart-home-monitor.com/image.png
+      properties:
+        name:
+          description: The name of the button
+          maxLength: 100
+          type: string
+        releasedIconUrl:
+          description: An icon image url on button-released. HTTPS url required.
+          example: https://smart-home-monitor.com/image.png
+          format: uri
+          maxLength: 250
+          type: string
+        pressedIconUrl:
+          description: An icon image url on button-pressed. HTTPS url required.
+          example: https://smart-home-monitor.com/image.png
+          format: uri
+          maxLength: 250
+          type: string
+        action:
+          $ref: '#/components/schemas/Action'
+      type: object
+    Event:
+      description: The event information, only populated if the execution type is
+        EVENT.
+      example:
+        deviceCommandsEvent:
+          eventId: eventId
+          profileId: profileId
+          externalId: externalId
+          deviceId: deviceId
+          commands:
+          - capability: switch
+            componentId: main
+            arguments: []
+            command: "on"
+          - capability: switch
+            componentId: main
+            arguments: []
+            command: "on"
+        deviceHealthEvent:
+          hubId: hubId
+          eventId: eventId
+          reason: NONE
+          locationId: locationId
+          deviceId: deviceId
+          status: OFFLINE
+        modeEvent:
+          eventId: eventId
+          modeId: modeId
+          locationId: locationId
+        eventTime: 2000-01-23T04:56:07.000+00:00
+        securityArmStateEvent:
+          eventId: eventId
+          armState: UNKNOWN
+          optionalArguments:
+            key:
+              stringValue: stringValue
+              intValue: 0
+              valueType: NULL_VALUE
+              boolValue: true
+              doubleValue: 6.027456183070403
+          locationId: locationId
+        deviceLifecycleEvent:
+          principal: principal
+          eventId: eventId
+          locationId: locationId
+          create: '{}'
+          update: '{}'
+          moveFrom:
+            locationId: locationId
+          deviceId: deviceId
+          deviceName: deviceName
+          delete: '{}'
+          moveTo:
+            locationId: locationId
+        sceneLifecycleEvent:
+          eventId: eventId
+          locationId: locationId
+          sceneId: sceneId
+          create: '{}'
+          update: '{}'
+          delete: '{}'
+        deviceEvent:
+          eventId: 736e3903-001c-4d40-b408-ff40d162a06b
+          capability: motionSensor
+          componentId: main
+          data: '{}'
+          locationId: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+          valueType: number
+          subscriptionName: motion_sensors
+          stateChange: true
+          attribute: motion
+          deviceId: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+          value: active
+        timerEvent:
+          eventId: eventId
+          expression: expression
+          name: lights_off_timeout
+          time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        eventTime:
+          description: The IS0-8601 date time string in UTC that this event was created.
+          format: date-time
+          type: string
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        deviceEvent:
+          $ref: '#/components/schemas/DeviceEvent'
+        deviceLifecycleEvent:
+          $ref: '#/components/schemas/DeviceLifecycleEvent'
+        deviceHealthEvent:
+          $ref: '#/components/schemas/DeviceHealthEvent'
+        deviceCommandsEvent:
+          $ref: '#/components/schemas/DeviceCommandsEvent'
+        modeEvent:
+          $ref: '#/components/schemas/ModeEvent'
+        timerEvent:
+          $ref: '#/components/schemas/TimerEvent'
+        sceneLifecycleEvent:
+          $ref: '#/components/schemas/SceneLifecycleEvent'
+        securityArmStateEvent:
+          $ref: '#/components/schemas/SecurityArmStateEvent'
+      type: object
+    EventType:
+      description: |
+        The type of event passed to the app being executed. The type will be one of:
+          * DEVICE_COMMANDS_EVENT - _Only applicable for cloud-to-cloud device integration apps._ An event as a result of a device command execution request.
+          * DEVICE_EVENT - A device event as a result of a subscription the app created.
+          * DEVICE_HEALTH_EVENT - A device health event as a result of a change in a device's health.
+          * DEVICE_LIFECYCLE_EVENT - A device lifecycle event as the result of a life change to the device.
+          * MODE_EVENT - A mode event is triggered when the location's mode is changed.
+          * SCENE_LIFECYCLE_EVENT - A scene lifecycle event as a result of a life change to the scene.
+          * SECURITY_ARM_STATE_EVENT - A security arm state event as a result of a change in the arm state of a security system.
+          * TIMER_EVENT - An event as a result of a scheduled app execution.
+      enum:
+      - DEVICE_COMMANDS_EVENT
+      - DEVICE_EVENT
+      - DEVICE_HEALTH_EVENT
+      - DEVICE_LIFECYCLE_EVENT
+      - MODE_EVENT
+      - SCENE_LIFECYCLE_EVENT
+      - SECURITY_ARM_STATE_EVENT
+      - TIMER_EVENT
+      type: string
+    DeviceCommandsEvent:
+      description: An event that contains commands for devices that were created by
+        this app.
+      example:
+        eventId: eventId
+        profileId: profileId
+        externalId: externalId
+        deviceId: deviceId
+        commands:
+        - capability: switch
+          componentId: main
+          arguments: []
+          command: "on"
+        - capability: switch
+          componentId: main
+          arguments: []
+          command: "on"
+      properties:
+        eventId:
+          description: The id of the event.
+          type: string
+        deviceId:
+          description: The guid of the device that the commands are for.
+          type: string
+        profileId:
+          description: The device profile ID of the device instance.
+          type: string
+        externalId:
+          description: The external ID that was set during install of a device.
+          type: string
+        commands:
+          items:
+            $ref: '#/components/schemas/DeviceCommandsEventCommand'
+          type: array
+      type: object
+    DeviceCommandsEventCommand:
+      example:
+        capability: switch
+        componentId: main
+        arguments: []
+        command: "on"
+      properties:
+        componentId:
+          example: main
+          type: string
+        capability:
+          example: switch
+          type: string
+        command:
+          example: "on"
+          type: string
+        arguments:
+          example: []
+          items:
+            properties: {}
+            type: object
+          type: array
+      type: object
+    DeviceEvent:
+      description: An event on a device that matched a subscription for this app.
+      example:
+        eventId: 736e3903-001c-4d40-b408-ff40d162a06b
+        capability: motionSensor
+        componentId: main
+        data: '{}'
+        locationId: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+        valueType: number
+        subscriptionName: motion_sensors
+        stateChange: true
+        attribute: motion
+        deviceId: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+        value: active
+      properties:
+        eventId:
+          description: The ID of the event.
+          example: 736e3903-001c-4d40-b408-ff40d162a06b
+          type: string
+        locationId:
+          description: The ID of the location in which the event was triggered.
+          example: 499e28ba-b33b-49c9-a5a1-cce40e41f8a6
+          type: string
+        deviceId:
+          description: The ID of the device associated with the DEVICE_EVENT.
+          example: 6f5ea629-4c05-4a90-a244-cc129b0a80c3
+          type: string
+        componentId:
+          description: The name of the component on the device that the event is associated
+            with.
+          example: main
+          type: string
+        capability:
+          description: The name of the capability associated with the DEVICE_EVENT.
+          example: motionSensor
+          type: string
+        attribute:
+          description: The name of the DEVICE_EVENT. This typically corresponds to
+            an attribute name of the device-handler’s capabilities.
+          example: motion
+          type: string
+        value:
+          description: |
+            The value of the event. The type of the value is dependent on the capability's attribute type.
+          example: active
+          properties: {}
+          type: object
+        valueType:
+          description: |
+            The root level data type of the value field. The data types are representitive of standard JSON data types.
+          example: number
+          type: string
+        stateChange:
+          description: Whether or not the state of the device has changed as a result
+            of the DEVICE_EVENT.
+          type: boolean
+        data:
+          description: json map as defined by capability data schema
+          properties: {}
+          type: object
+        subscriptionName:
+          description: The name of subscription that caused delivery.
+          example: motion_sensors
+          type: string
+      type: object
+    DeviceHealthEvent:
+      description: An event that represents a change in the health of the a device.
+      example:
+        hubId: hubId
+        eventId: eventId
+        reason: NONE
+        locationId: locationId
+        deviceId: deviceId
+        status: OFFLINE
+      properties:
+        eventId:
+          description: The id of the event.
+          type: string
+        locationId:
+          description: The id of the location in which the event was triggered.
+          type: string
+        deviceId:
+          description: The id of the device.
+          type: string
+        hubId:
+          description: The id of the hub.
+          type: string
+        status:
+          description: |
+            The status of the device.
+          enum:
+          - OFFLINE
+          - ONLINE
+          - UNHEALTHY
+          type: string
+        reason:
+          description: |
+            The reason the device is offline.
+          enum:
+          - NONE
+          - SERVICE_UNAVAILABLE
+          - HUB_OFFLINE
+          - ZWAVE_OFFLINE
+          - ZIGBEE_OFFLINE
+          - BLUETOOTH_OFFLINE
+          - HUB_DISCONNECTED
+          type: string
+      type: object
+    DeviceLifecycle:
+      description: |
+        The device lifecycle. The lifecycle will be one of:
+        * CREATE - Invoked when a device is created.
+        * DELETE - Invoked when a device is deleted.
+        * UPDATE - Invoked when a device is updated.
+        * MOVE_FROM - Invoked when a device is moved from a location.
+        * MOVE_TO - Invoked when a device is moved to a location.
+      enum:
+      - CREATE
+      - DELETE
+      - UPDATE
+      - MOVE_FROM
+      - MOVE_TO
+      type: string
+    DeviceLifecycleCreate:
+      description: |
+        Create device lifecycle.
+      type: object
+    DeviceLifecycleDelete:
+      description: |
+        Delete device lifecycle.
+      type: object
+    DeviceLifecycleEvent:
+      description: A device lifecycle event.
+      example:
+        principal: principal
+        eventId: eventId
+        locationId: locationId
+        create: '{}'
+        update: '{}'
+        moveFrom:
+          locationId: locationId
+        deviceId: deviceId
+        deviceName: deviceName
+        delete: '{}'
+        moveTo:
+          locationId: locationId
+      properties:
+        lifecycle:
+          $ref: '#/components/schemas/DeviceLifecycle'
+        eventId:
+          description: The id of the event.
+          type: string
+        locationId:
+          description: The id of the location in which the event was triggered.
+          type: string
+        deviceId:
+          description: The id of the device.
+          type: string
+        deviceName:
+          description: The name of the device
+          type: string
+        principal:
+          description: The principal that made the change
+          type: string
+        create:
+          description: |
+            Create device lifecycle.
+          type: object
+        delete:
+          description: |
+            Delete device lifecycle.
+          type: object
+        update:
+          description: |
+            Update device lifecycle.
+          type: object
+        moveFrom:
+          $ref: '#/components/schemas/DeviceLifecycleMove'
+        moveTo:
+          $ref: '#/components/schemas/DeviceLifecycleMove'
+      type: object
+    DeviceLifecycleMove:
+      description: |
+        Move device lifecycle.
+      example:
+        locationId: locationId
+      properties:
+        locationId:
+          type: string
+      type: object
+    DeviceLifecycleUpdate:
+      description: |
+        Update device lifecycle.
+      type: object
+    ModeEvent:
+      example:
+        eventId: eventId
+        modeId: modeId
+        locationId: locationId
+      properties:
+        eventId:
+          description: The id of the event.
+          type: string
+        locationId:
+          description: The id of the location in which the event was triggered.
+          type: string
+        modeId:
+          description: The ID of the mode associated with a MODE_EVENT.
+          type: string
+      type: object
+    SceneLifecycle:
+      description: |
+        The scene lifecycle. The lifecycle will be one of:
+        * CREATE - Invoked when a scene is created.
+        * UPDATE - Invoked when a scene is updated.
+        * DELETE - Invoked when a scene is deleted.
+      enum:
+      - CREATE
+      - UPDATE
+      - DELETE
+      type: string
+    SceneLifecycleCreate:
+      description: |
+        Create scene lifecycle.
+      type: object
+    SceneLifecycleDelete:
+      description: |
+        Delete scene lifecycle.
+      type: object
+    SceneLifecycleEvent:
+      description: A scene lifecycle event.
+      example:
+        eventId: eventId
+        locationId: locationId
+        sceneId: sceneId
+        create: '{}'
+        update: '{}'
+        delete: '{}'
+      properties:
+        lifecycle:
+          $ref: '#/components/schemas/SceneLifecycle'
+        eventId:
+          description: The id of the event.
+          type: string
+        locationId:
+          description: The id of the location in which the event was triggered.
+          type: string
+        sceneId:
+          description: The id of the scene.
+          type: string
+        create:
+          description: |
+            Create scene lifecycle.
+          type: object
+        update:
+          description: |
+            Update scene lifecycle.
+          type: object
+        delete:
+          description: |
+            Delete scene lifecycle.
+          type: object
+      type: object
+    SceneLifecycleUpdate:
+      description: |
+        Update scene lifecycle.
+      type: object
+    SecurityArmStateEvent:
+      description: |
+        An event that represents a change in the arm state of a security system.
+      example:
+        eventId: eventId
+        armState: UNKNOWN
+        optionalArguments:
+          key:
+            stringValue: stringValue
+            intValue: 0
+            valueType: NULL_VALUE
+            boolValue: true
+            doubleValue: 6.027456183070403
+        locationId: locationId
+      properties:
+        eventId:
+          description: The id of the event.
+          type: string
+        locationId:
+          description: The id of the location in which the event was triggered.
+          type: string
+        armState:
+          description: |
+            The arm state of a security system.
+          enum:
+          - UNKNOWN
+          - ARMED_STAY
+          - ARMED_AWAY
+          - DISARMED
+          type: string
+        optionalArguments:
+          additionalProperties:
+            $ref: '#/components/schemas/SimpleValue'
+          description: |
+            A set of key / value pairs useful for passing any optional arguments.
+          type: object
+      type: object
+    SimpleValue:
+      description: A simple value.
+      example:
+        stringValue: stringValue
+        intValue: 0
+        valueType: NULL_VALUE
+        boolValue: true
+        doubleValue: 6.027456183070403
+      properties:
+        valueType:
+          description: |
+            The type of the value.
+          enum:
+          - NULL_VALUE
+          - INT_VALUE
+          - DOUBLE_VALUE
+          - STRING_VALUE
+          - BOOLEAN_VALUE
+          type: string
+        intValue:
+          type: integer
+        doubleValue:
+          format: double
+          type: number
+        stringValue:
+          type: string
+        boolValue:
+          type: boolean
+      type: object
+    TimerEvent:
+      description: An event that is caused by a schedule for this app being fired.
+      example:
+        eventId: eventId
+        expression: expression
+        name: lights_off_timeout
+        time: 2000-01-23T04:56:07.000+00:00
+      properties:
+        eventId:
+          description: The ID of the event.
+          type: string
+        name:
+          description: The name of the schedule that caused this event.
+          example: lights_off_timeout
+          type: string
+        type:
+          $ref: '#/components/schemas/TimerType'
+        time:
+          description: The IS0-8601 date time strings in UTC that this event was scheduled
+            for.
+          format: date-time
+          type: string
+        expression:
+          description: The CRON expression if the schedule was of type CRON.
+          type: string
+      type: object
+    TimerType:
+      description: The type of TIMER_EVENT.
+      enum:
+      - CRON
+      - ONCE
+      type: string
+    InitializeSetting_allOf:
+      properties:
+        firstPageId:
+          description: A developer defined page ID of the first page to display. Must
+            be URL safe characters.
+          format: ^[a-zA-Z0-9.-_]{1,36}$
+          type: string
+        disableCustomDisplayName:
+          default: false
+          description: Disable the ability for the user to customize the display name.
+          type: boolean
+        disableRemoveApp:
+          default: false
+          description: Disable the ability to remove the app from the configuration
+            flow.
+          type: boolean
+        permissions:
+          items:
+            type: string
+          type: array
+    SectionSetting_allOf:
+      properties:
+        required:
+          default: false
+          description: Indicates if this setting is required for configuration.
+          type: boolean
+        disabled:
+          default: false
+          description: Indicates if this setting should be disabled
+          type: boolean
+        type:
+          $ref: '#/components/schemas/SettingType'
+      required:
+      - type
+    DeviceSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        multiple:
+          default: false
+          description: Indicates if this device setting can have multiple values.
+          type: boolean
+        closeOnSelection:
+          default: true
+          description: Indicates if this input should close on selection.
+          type: boolean
+        submitOnChange:
+          default: false
+          description: Indicates if this input should refresh configs after a change
+            in value.
+          type: boolean
+        preselect:
+          default: false
+          description: Indicates if the first device in the list of options should
+            be pre selected.
+          type: boolean
+        capabilities:
+          description: The required capabilities for the device(s) options.
+          items:
+            maxLength: 128
+            type: string
+          type: array
+        excludeCapabilities:
+          description: The excluded capabilities for the device(s) options.
+          items:
+            maxLength: 128
+            type: string
+          type: array
+        permissions:
+          description: The required permissions for the selected device(s).
+          items:
+            enum:
+            - r
+            - x
+            - w
+            type: string
+          type: array
+        style:
+          $ref: '#/components/schemas/StyleType'
+    OAuthSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        urlTemplate:
+          description: |
+            The url to use for the OAuth service.
+            Use __SmartThingsOAuthCallback__ in the template for the callback/redirect url you need to provide to the OAuth service.
+          example: http://www.smartthings.com/oauth?param1=1&param2=2&callback=__SmartThingsOAuthCallback__
+          maxLength: 2048
+          type: string
+        style:
+          $ref: '#/components/schemas/StyleType'
+    TimeSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        max:
+          description: The maximum inclusive value the time can be set to (only the
+            time will be used out of the date time).
+          format: date-time
+          type: string
+        min:
+          description: The minimum inclusive value the time can be set to (only the
+            time will be used out of the date time).
+          format: date-time
+          type: string
+        submitOnChange:
+          default: false
+          description: Indicates if this input should refresh configs after a change
+            in value.
+          type: boolean
+    TextSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        maxLength:
+          description: The maximum length the text can have.
+          type: integer
+        minLength:
+          description: The minimum length the text can have.
+          type: integer
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        postMessage:
+          description: A string to be shown after the text input field.
+          maxLength: 10
+          type: string
+    PasswordSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        maxLength:
+          description: The maximum length the password can have.
+          type: integer
+        minLength:
+          description: The minimum length the password can have.
+          type: integer
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+    PhoneSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+    NumberSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        max:
+          description: The maximum inclusive value the number can be set to.
+          type: integer
+        min:
+          description: The minumum inclusive value the number can be set to.
+          type: integer
+        step:
+          description: The increment to step by.
+          type: integer
+        style:
+          description: The way to style the number input.
+          enum:
+          - SLIDER
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        postMessage:
+          description: A string to be shown after the text input field.
+          maxLength: 10
+          type: string
+    DecimalSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        max:
+          description: The maximum inclusive value the decimal can be set to.
+          type: integer
+        min:
+          description: The minumum inclusive value the decimal can be set to.
+          type: integer
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        postMessage:
+          description: A string to be shown after the text input field.
+          maxLength: 10
+          type: string
+    BooleanSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        submitOnChange:
+          default: false
+          description: Indicates if this input should refresh configs after a change
+            in value.
+          type: boolean
+    LinkSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        url:
+          description: The page to navigate to.
+          maxLength: 2048
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        style:
+          $ref: '#/components/schemas/LinkStyleType'
+    PageSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        page:
+          description: The page to navigate to.
+          maxLength: 128
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+        style:
+          $ref: '#/components/schemas/LinkStyleType'
+    ImagesSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        images:
+          description: The images to display.
+          items:
+            description: The image url.
+            maxLength: 2048
+            type: string
+          type: array
+    VideoSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        video:
+          description: The video url.
+          maxLength: 2048
+          type: string
+        image:
+          description: The image url.
+          maxLength: 2048
+          type: string
+    EnumSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        multiple:
+          default: false
+          description: Indicates if this enum setting can have multiple values.
+          type: boolean
+        closeOnSelection:
+          default: true
+          description: Indicates if this input should close on selection.
+          type: boolean
+        groupedOptions:
+          description: Display the enum options as groups.
+          items:
+            $ref: '#/components/schemas/GroupedOption'
+          type: array
+        options:
+          description: The enum options.
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+        submitOnChange:
+          default: false
+          description: Indicates if this input should refresh configs after a change
+            in value.
+          type: boolean
+        style:
+          $ref: '#/components/schemas/EnumStyleType'
+    ModeSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        multiple:
+          default: false
+          description: Indicates if this enum setting can have multiple values.
+          type: boolean
+        closeOnSelection:
+          default: true
+          description: Indicates if this input should close on selection.
+          type: boolean
+        submitOnChange:
+          default: false
+          description: Indicates if this input should refresh configs after a change
+            in value.
+          type: boolean
+        style:
+          $ref: '#/components/schemas/StyleType'
+    SceneSetting_allOf:
+      properties:
+        defaultValue:
+          description: A default value for the setting.
+          maxLength: 128
+          type: string
+        multiple:
+          default: false
+          description: Indicates if this scene setting can have multiple values.
+          type: boolean
+        closeOnSelection:
+          default: true
+          description: Indicates if this input should close on selection.
+          type: boolean
+        submitOnChange:
+          default: false
+          description: Indicates if this input should refresh configs after a change
+            in value.
+          type: boolean
+        style:
+          $ref: '#/components/schemas/StyleType'

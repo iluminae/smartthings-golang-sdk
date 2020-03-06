@@ -1,0 +1,6 @@
+{
+  "isGoSubmodule": true,
+  "packageName": "smartapp",
+  "withGoCodegenComment": true,
+  "enumClassPrefix": true
+}

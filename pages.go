@@ -1,24 +1,25 @@
 package main
 
-var Pages = map[string]Page{"intro": {
+import "github.com/iluminae/smartthings-golang-sdk/smartapp"
+
+var Pages = map[string]smartapp.Page{"intro": {
 	PageId:   "intro",
 	Name:     "Install Golang App",
 	Complete: true,
 	Style:    "NORMAL",
-	Sections: []Section{
+	Sections: []smartapp.Section{
 		{
 			Name:  "Sensors",
 			Style: "NORMAL",
-			Settings: []SectionSettings{
-				DeviceSettings{
-					CommonSettings: CommonSettings{
-						Id:          "sensors",
-						Name:        "Sensors",
-						Description: "Select Sensors",
-						Type:        "DEVICE",
-						Required:    false,
-						Disabled:    false,
-					},
+			Settings: []smartapp.SectionSettingInterface{
+				smartapp.DeviceSetting{
+					Id:           "sensors",
+					Name:         "Sensors",
+					Description:  "Select Sensors",
+					Type:         smartapp.SETTINGTYPE_DEVICE,
+					Required:     false,
+					Disabled:     false,
+					Multiple:     true,
 					Capabilities: []string{"switch"},
 					Permissions:  []string{"r"},
 				},
@@ -27,17 +28,16 @@ var Pages = map[string]Page{"intro": {
 		{
 			Name:  "Lights",
 			Style: "NORMAL",
-			Settings: []SectionSettings{
-				DeviceSettings{
-					CommonSettings: CommonSettings{
-						Id:          "lights",
-						Name:        "Lights",
-						Description: "Select Lights",
-						Type:        "DEVICE",
-						Required:    false,
-						Disabled:    false,
-					},
-					Capabilities: []string{"switch"},
+			Settings: []smartapp.SectionSettingInterface{
+				smartapp.DeviceSetting{
+					Id:           "lights",
+					Name:         "Lights",
+					Description:  "Select Lights",
+					Type:         smartapp.SETTINGTYPE_DEVICE,
+					Required:     false,
+					Disabled:     false,
+					Multiple:     true,
+					Capabilities: []string{"light"},
 					Permissions:  []string{"r"},
 				},
 			},
